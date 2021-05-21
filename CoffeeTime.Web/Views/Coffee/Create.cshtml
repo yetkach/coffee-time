@@ -1,0 +1,81 @@
+﻿@model CoffeeViewModel
+
+<div class="cards">
+    <div class="card-edit">
+        <img src=@Model.Image />
+        <form asp-antiforgery="true" asp-action="Create" asp-controller="Coffee" method="post">
+            <input asp-for="Name" hidden />
+            <div class="options">
+                <div>
+                    <div style="margin-bottom:5px">
+                        <label asp-for="Volume"></label>
+                        <br />
+                        <div id="volume-options">
+                            @for (int i = 0; i < Model.Volumes.Count; i++)
+                            {
+                                <div class="volume-item">
+                                    @if (i == 0)
+                                    {
+                                        <input asp-for="Volume" type="radio" value=@Model.Volumes[i].Volume checked />
+                                    }
+                                    else
+                                    {
+                                        <input asp-for="Volume" type="radio" value=@Model.Volumes[i].Volume />
+                                    }
+
+                                    <span>@Model.Volumes[i].Volume</span>
+                                </div>
+
+                            }
+                        </div>
+
+                    </div>
+                </div>
+                <div style="margin-bottom:10px">
+                    <label asp-for="Sugar"></label>
+                    <div>
+                        <input class="range-style" type="range" asp-for="Sugar" min="No Sugar" max="3" />
+                        <span id="number">No sugar</span>
+                    </div>
+                </div>
+                @if (Model.Name == "Americano")
+                {
+                    <div>
+                        <input asp-for="Milk" type="checkbox" />
+                        <label asp-for="Milk"></label>
+                    </div>
+                }
+                <div class="card-last-line">
+                    <div>
+                        <input asp-for="CupCap" type="checkbox" />
+                        <label asp-for="CupCap"></label>
+                    </div>
+                    <div>
+                        <h4 class="price-value" id="price"></h4>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <input class="card-edit-button" type="submit" value="Checkout" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    const coffees = [];
+
+    @for (int i = 0; i < Model.Volumes.Count; i++)
+    {
+        var variableName = $"coffee{i}";
+        <text>
+    const @variableName = {
+        volume: '@Model.Volumes[i].Volume',
+        price: '@Model.Volumes[i].PriceData.Price'
+    };
+
+    coffees.push(@variableName);
+        </text>
+    }
+</script>
+<script src="~/js/main.js"></script>

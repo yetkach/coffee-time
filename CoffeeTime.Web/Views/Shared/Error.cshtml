@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "Error page";
+}
+<div class="container">
+    <div class="message">
+        @{ 
+            string message = ViewBag.Message ?? "Something went wrong";
+        }
+        <h2 class="message-font">@message</h2>
+    </div>
+</div>

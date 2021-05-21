@@ -1,0 +1,54 @@
+﻿@model List<CoffeeForShowcaseViewModel>
+
+<div class="container">
+    <div id="my-carousel" class="carousel slide carousel-box center-block " data-ride="carousel">
+        <ol class="carousel-indicators hidden">
+            <li data-target="#my-carousel" data-slide-to="0" class="active"></li>
+            <li data-target="#my-carousel" data-slide-to="1"></li>
+            <li data-target="#my-carousel" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+           
+            @{
+                string itemCarousel = "item active";
+                int counter = 0;
+
+                foreach (var coffeeData in Model)
+                {
+                    if (counter > 0)
+                    {
+                        itemCarousel = "item";
+                    }
+
+                    <div class="@itemCarousel">
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <img class="img-full" alt="First slide" src="@coffeeData.Image">
+                            </div>
+                            <a asp-controller="Coffee" asp-action="Create" asp-route-name="@coffeeData.Name" class="button">
+                                <div class="card-footer">
+                                    <span class="btn-text">Choose</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    counter++;
+                }
+            }
+
+            <a class="left carousel-control" href="#my-carousel" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left carousel-link" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#my-carousel" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right carousel-link" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+

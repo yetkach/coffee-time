@@ -1,0 +1,60 @@
+﻿@model OrderViewModel
+
+<div class="container order-font">
+    <main>
+        <div class="py-5 text-center">
+            <h2 class="order-text">Fill out the order form</h2>
+        </div>
+        <div class="row-g-3">
+            <div class="col-md-5 col-lg-4 order-md-last">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="order-text">Your cart</span>
+                    <span class="badge bg-light rounded-pill">@Model.CoffeeCartItems.Count()</span>
+                </h4>
+                <ul class="list-group mb-3">
+                    @foreach (var coffee in Model.CoffeeCartItems)
+                    {
+                        <li class="list-group-item d-flex justify-content-between">
+                            <span class="text-in-cart">@coffee.Name</span>
+                            <span class="text-muted">$@coffee.Price</span>
+                        </li>
+                    }
+
+                    <li class="list-group-item d-flex justify-content-between">
+                        <strong class="text-in-cart">Total (USD)</strong>
+                        <strong>$@Model.Price</strong>
+                    </li>
+                    <li class="order-button-add">
+                        <a asp-controller="Coffee" asp-action="Index">
+                            <span>Add More</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-7 col-lg-8">
+                <form asp-antiforgery="true" asp-action="Create" asp-controller="Order" method="post" autocomplete="off">
+                    <input asp-for="Price" hidden />
+                    <div class="row-g-3">
+                        <div class="col-sm-6">
+                            <label asp-for="UserFirstName" class="order-text">First name</label>
+                            <span style="margin-left:10px" asp-validation-for="UserFirstName" class="text-danger"></span>
+                            <input type="text" class="form-control" asp-for="UserFirstName" data-val-required="This field is required">
+                        </div>
+                        <div class=" col-sm-6">
+                            <label asp-for="UserLastName" class="order-text" data-msg-required="my message">Last name</label>
+                            <span style="margin-left:10px" asp-validation-for="UserLastName" class="text-danger"></span>
+                            <input type="text" class="form-control" asp-for="UserLastName" data-val-required="This field is required">
+                        </div>
+                        <div class="col-md-12">
+                            <label asp-for="UserPhoneNumber" class="order-text">Phone Number</label>
+                            <span style="margin-left:10px" asp-validation-for="UserPhoneNumber" class="text-danger"></span>
+                            <input class="form-control phone-input" placeholder="+38(###)###-##-##" asp-for="UserPhoneNumber" data-val-required="This field is required">
+                            <input type="submit" class="order-button-check" value="Checkout" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+</div>
+

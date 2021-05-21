@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap" rel="stylesheet">
+    <link href="~/libs/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+    <link href="~/css/fonts.css" rel="stylesheet" />
+    <link href="~/css/main.css" rel="stylesheet" />
+    <link href="~/css/media.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="container-fluid content">
+        <header>
+            <nav>
+                <div class="container">
+                    <div class="row">
+                        <div class="navbar-header">
+                            <button class="navbar-toggle collapsed menu_btn" data-toggle="collapse" data-target="#top_menu">
+                                <span class="glyphicon glyphicon-menu-hamburger"></span>
+                            </button>
+                            <a asp-controller="Home" asp-action="Index" class="navbar-brand logo">
+                                <span class="coffeetext">Coffee</span>
+                                <span class="timetext">Time</span>
+                            </a>
+                        </div>
+                        <div class="collapse navbar-collapse navbar-right" id="top_menu">
+                            <ul class="menu">
+                                <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                                <li><a asp-controller="Order" asp-action="Create">Cart</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="top_line"></div>
+                </div>
+            </nav>
+        </header>
+        <main class="container-fluid">
+            @RenderBody()
+        </main>
+    </div>
+    <script src="~/libs/jquery/jquery-2.1.4.min.js"></script>
+    <script src="~/libs/bootstrap/js/bootstrap.js"></script>
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+</body>
+</html>
